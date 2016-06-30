@@ -1,0 +1,17 @@
+{% extends 'DyloProdPPSBundle::base.html.twig' %}
+
+{% block content %}
+    <h1>{{ photo_sentence }}</h1>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Valider" class="btn btn-success pull-right" />
+    {{ form_end(form) }}
+    
+    <div id="info"></div>
+{% endblock %}
+
+{% block js %}
+    {% javascripts '@DyloProdPPSBundle/Resources/public/js/photo.js' %}
+            <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

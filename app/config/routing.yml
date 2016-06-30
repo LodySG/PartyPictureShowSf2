@@ -1,0 +1,8 @@
+dylo_prod_pps:
+    resource: "@DyloProdPPSBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+
+

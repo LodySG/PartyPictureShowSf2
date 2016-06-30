@@ -1,0 +1,201 @@
+<?php
+
+namespace DyloProd\PPSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Event
+ *
+ * @ORM\Table(name="event")
+ * @ORM\Entity(repositoryClass="DyloProd\PPSBundle\Repository\EventRepository")
+ */
+class Event
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     * @Assert\NotBlank
+     * @ORM\Column(name="titre", type="string", length=50, unique=true)
+     */
+    private $titre;
+
+    /**
+     * @var \DateTime
+     * @Assert\LessThan("now")
+     * @ORM\Column(name="h_debut", type="datetime")
+     */
+    private $hDebut;
+
+    /**
+     * @var \DateTime
+     * @Assert\GreaterThan("now")
+     * @ORM\Column(name="h_fin", type="datetime")
+     */
+    private $hFin;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="event")
+     */
+    private $photos;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     * @return Event
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     * @return string 
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set hDebut
+     * @param \DateTime $hDebut
+     * @return Event
+     */
+    public function setHDebut($hDebut)
+    {
+        $this->hDebut = $hDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get hDebut
+     *
+     * @return \DateTime 
+     */
+    public function getHDebut()
+    {
+        return $this->hDebut;
+    }
+
+    /**
+     * Set hFin
+     *
+     * @param \DateTime $hFin
+     * @return Event
+     */
+    public function setHFin($hFin)
+    {
+        $this->hFin = $hFin;
+
+        return $this;
+    }
+
+    /**
+     * Get hFin
+     *
+     * @return \DateTime 
+     */
+    public function getHFin()
+    {
+        return $this->hFin;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->guests = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add guests
+     *
+     * @param \DyloProd\PPSBundle\Entity\Guest $guests
+     * @return Event
+     */
+    public function addGuest(\DyloProd\PPSBundle\Entity\Guest $guests)
+    {
+        $this->guests[] = $guests;
+
+        return $this;
+    }
+
+    /**
+     * Remove guests
+     *
+     * @param \DyloProd\PPSBundle\Entity\Guest $guests
+     */
+    public function removeGuest(\DyloProd\PPSBundle\Entity\Guest $guests)
+    {
+        $this->guests->removeElement($guests);
+    }
+
+    /**
+     * Get guests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGuests()
+    {
+        return $this->guests;
+    }
+
+    /**
+     * Add photos
+     *
+     * @param \DyloProd\PPSBundle\Entity\Photo $photos
+     * @return Event
+     */
+    public function addPhoto(\DyloProd\PPSBundle\Entity\Photo $photos)
+    {
+        $this->photos[] = $photos;
+
+        return $this;
+    }
+
+    /**
+     * Remove photos
+     *
+     * @param \DyloProd\PPSBundle\Entity\Photo $photos
+     */
+    public function removePhoto(\DyloProd\PPSBundle\Entity\Photo $photos)
+    {
+        $this->photos->removeElement($photos);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+}

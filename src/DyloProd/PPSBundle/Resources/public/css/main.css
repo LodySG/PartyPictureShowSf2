@@ -1,0 +1,10 @@
+body
+{
+    padding-top: 65px;
+    background-color: orange;
+    color: black;
+}
+
+img {
+    image-orientation: from-image;
+}

@@ -1,0 +1,31 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: pps
+    database_user: pps
+    database_password: cEQwBKrydZ2UJbXt
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: ac124bc4472d3bd4e3bcbcf65e0787d44f5241e7
+    photos_directory: '%kernel.root_dir%/../web/uploads/photos'
+    photo_sentences:
+        - "Une photo !! Une photo !! Une photo !! Une photo !! ..."
+        - "Fais péter ta tof !"
+        - "Ah bah voila !!! Une photo ..."
+    login_set:
+        name: login
+        sentences:
+            - "Euh ... Vous êtes ... ???"
+            - "C'est quoi ton blaze ?'"
+            - "Qui t'es toi ?'"
+    update_user_set:
+        name: update_user
+        sentences:
+            - "T'es qui alors ??"
+            - "C'est pas ton prénom ?"
+            - "Mais qui êtes vous exactement ?"

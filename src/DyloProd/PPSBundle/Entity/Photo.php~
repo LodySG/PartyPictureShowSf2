@@ -1,0 +1,121 @@
+<?php
+
+namespace DyloProd\PPSBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Photo
+ *
+ * @ORM\Table(name="photo")
+ * @ORM\Entity(repositoryClass="DyloProd\PPSBundle\Repository\PhotoRepository")
+ */
+class Photo
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture_name", type="string", length=255, unique=true)
+     */
+    private $pictureName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="photos")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Guest", inversedBy="photos")
+     * @ORM\JoinColumn(name="guest_id", referencedColumnName="id")
+     */
+    private $guest;
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set pictureName
+     *
+     * @param string $pictureName
+     * @return Photo
+     */
+    public function setPictureName($pictureName)
+    {
+        $this->pictureName = $pictureName;
+
+        return $this;
+    }
+
+    /**
+     * Get pictureName
+     *
+     * @return string 
+     */
+    public function getPictureName()
+    {
+        return $this->pictureName;
+    }
+
+    /**
+     * Set event
+     *
+     * @param \DyloProd\PPSBundle\Entity\Event $event
+     * @return Photo
+     */
+    public function setEvent(\DyloProd\PPSBundle\Entity\Event $event = null)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event
+     *
+     * @return \DyloProd\PPSBundle\Entity\Event 
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Set guest
+     *
+     * @param \DyloProd\PPSBundle\Entity\Guest $guest
+     * @return Photo
+     */
+    public function setGuest(\DyloProd\PPSBundle\Entity\Guest $guest = null)
+    {
+        $this->guest = $guest;
+
+        return $this;
+    }
+
+    /**
+     * Get guest
+     *
+     * @return \DyloProd\PPSBundle\Entity\Guest 
+     */
+    public function getGuest()
+    {
+        return $this->guest;
+    }
+}

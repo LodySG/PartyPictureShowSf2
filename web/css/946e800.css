@@ -1,0 +1,24 @@
+body
+{
+    padding-top: 65px;
+    background-color: orange;
+    color: black;
+}
+
+img {
+    image-orientation: from-image;
+}
+html,body
+{
+    height:100%;
+}
+
+.carousel,.item,.active
+{
+    height:100%;
+}
+
+.carousel-inner
+{
+    height:100%;
+}

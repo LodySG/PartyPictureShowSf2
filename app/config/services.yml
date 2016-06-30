@@ -1,0 +1,31 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+#parameters:
+#    parameter_name: value
+
+services:
+    app.doctrine_photo_listener:
+        class: DyloProd\PPSBundle\EventListener\PhotoUploadListener
+        arguments: ["@app.photo.uploader"]
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+    app.photo.uploader:
+        class: DyloProd\PPSBundle\Utils\FileUploader
+        arguments: ['%photos_directory%']
+    form.type.login:
+        class: DyloProd\PPSBundle\Form\Type\GuestType
+        arguments: ["%login_set%"]
+        tags:
+            - { name: form.type , alias: login}
+    form.type.update_user:
+        class: DyloProd\PPSBundle\Form\Type\GuestType
+        arguments: ["%update_user_set%"]
+        tags:
+            - { name: form.type , alias: update_user}
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]

@@ -1,0 +1,53 @@
+{% extends 'DyloProdPPSBundle::base.html.twig' %}
+
+{% block css %}
+    {% stylesheets '@DyloProdPPSBundle/Resources/public/css/show.css' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-default btn-lg pull-right">Lancer la diapo</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="carousel-id" class="carousel slide" data-ride="carousel" role="listbox">
+                <ol class="carousel-indicators">
+                    {% set nb = 0 %}
+                    {% for photo in event.photos %}
+                        <li data-target="#carousel-id" data-slide-to="{{nb}}" class="{% if nb == 0 %}active{% endif %}" ></li>
+                        {% set nb = nb + 1 %}
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% set first = true %}
+                    {% for photo in event.photos %}
+                        <div class="item {% if first %}active{% endif %}">
+                            <img src="{{ asset('uploads/photos/' ~ photo.photo) }}"></img>
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h3>{{ photo.event.titre }}</h3>
+                                    <p>{{ photo.guest.username }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% set first = false %}
+                    {% endfor %}
+                </div>
+                <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    
+    {% javascripts '@DyloProdPPSBundle/Resources/public/js/show.js' %}
+            <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
